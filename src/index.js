@@ -4,8 +4,8 @@ studentName = "Bob Carris"
 
 // const studentName = "hello"
 
-// console.log('Hello ' + studentName + '! JavaScript is so much fun! Python is a lot of fun console.log(`Hello ${studentName}! JavaScript is so much fun! Python is a lot of fun too!`)too!')
-// 
+// console.log('Hello ' + studentName + '! JavaScript is so much fun! Python is a lot of fun too!')
+// console.log(`Hello ${studentName}! JavaScript is so much fun! Python is a lot of fun too!`)
 
 // The studentName variable contains the name of a student!
 // console.log(studentName)
