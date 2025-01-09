@@ -54,4 +54,42 @@ const otherFoods = [
     }
 ]
 
-// write your code here
+// Deliverable # 1 solution code
+const restaurantMenuElement = document.getElementById('restaurant-menu')
+for(const burger of burgers){
+    const imgElement = document.createElement('img')
+    imgElement.className = 'burger'
+    imgElement.src = burger.image
+    restaurantMenuElement.appendChild(imgElement)
+}
+
+// Deliverable # 2 solution code
+otherFoods.forEach(food => {
+    const imgElement = document.createElement('img')
+    imgElement.src = food.image
+    restaurantMenuElement.appendChild(imgElement)
+})
+
+// Deliverable # 3 solution code
+const detailImageElement = document.querySelector('.detail-image')
+detailImageElement.src = burgers[0].image
+
+// Deliverable # 4 solution code
+const nameElement = document.querySelector('.name')
+nameElement.textContent = burgers[0].name
+
+// Deliverable # 5 solution code
+const descriptionDisplayElement = document.getElementById('description-display')
+descriptionDisplayElement.textContent = burgers[0].description
+
+// Deliverable # 6 solution code
+const foodImgElements = document.querySelectorAll('div#restaurant-menu img')
+for(const imgElement of foodImgElements){
+    imgElement.style = "border-style: solid; border-color: red; border-width: 3px"
+}
+
+// Deliverable # 7 solution code
+const burgerImgElements = document.getElementsByClassName('burger')
+for(const imgElement of burgerImgElements){
+    imgElement.style.borderColor = "blue"
+}
