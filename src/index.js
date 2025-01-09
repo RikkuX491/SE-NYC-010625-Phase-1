@@ -55,3 +55,58 @@ const otherFoods = [
 ]
 
 // write your code here
+// const nameElement = document.querySelector('div#food-detail h2.name')
+const nameElement = document.querySelector('.name')
+nameElement.textContent = burgers[0].name
+
+// Using the createElement method() to create a new element
+const h1Element = document.createElement('h1')
+
+// Setting the textContent for this new element
+h1Element.textContent = "Ice cream is the best dessert ever!"
+
+// Using the getElementById() method to search for an element by its 'id'
+const foodDetailElement = document.getElementById('food-detail')
+// const foodDetailElement = document.querySelector('#food-detail')
+
+// Using the prepend() method to add this new element inside of the #food-detail element as the first child of #food-detail
+foodDetailElement.prepend(h1Element)
+
+const h3Element = document.createElement('h3')
+h3Element.textContent = "I love pizza"
+
+// foodDetailElement.append(h3Element)
+foodDetailElement.appendChild(h3Element)
+// foodDetailElement.append("hello", "goodbye")
+
+// querySelectorAll() and getElementsByClassName()
+// const selectedElements = document.querySelectorAll('.detail-image')
+const selectedElements = document.getElementsByClassName('detail-image')
+
+const allDivElements = document.querySelectorAll('div')
+
+// iterating over the NodeList stored in allDivElements variable with for...of
+for(const element of allDivElements){
+    console.log(element)
+}
+
+// Modifying the innerHTML attribute of an element to specify HTML that should be rendered inside of the element
+// foodDetailElement.innerHTML = "<h1>I love JavaScript</h1>"
+
+const language = "JavaScript"
+
+// Differences between textContent, innerText, and innerHTML
+// foodDetailElement.textContent = "<h1>I love\nJavaScript</h1>"
+// foodDetailElement.innerHTML = "<h1>I love\nJavaScript</h1>"
+// foodDetailElement.innerText = "<h1>I love\nJavaScript</h1>"
+
+foodDetailElement.innerHTML = `<h1>I love ${language}</h1>`
+
+const descriptionDisplayElement = document.getElementById('description-display')
+descriptionDisplayElement.remove()
+console.log(descriptionDisplayElement)
+
+const newImgElement = document.createElement('img')
+newImgElement.src = burgers[0].image
+
+foodDetailElement.appendChild(newImgElement)
