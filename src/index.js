@@ -52,18 +52,45 @@ const foods = [
 ]
 
 const restaurantMenuElement = document.getElementById('restaurant-menu')
+const detailImageElement = document.querySelector('.detail-image')
+const nameElement = document.querySelector('.name') 
+const descriptionDisplayElement = document.getElementById('description-display')
 
-foods.forEach(food => {
+function displayFoodDetails(food){
+    detailImageElement.src = food.image
+    nameElement.textContent = food.name
+    descriptionDisplayElement.textContent = food.description
+}
+
+function addFoodImageToRestaurantMenu(food){
     const foodImageElement = document.createElement('img')
     foodImageElement.src = food.image
     restaurantMenuElement.appendChild(foodImageElement)
+
+    // Deliverable # 1 solution code
+    foodImageElement.addEventListener('click', () => {
+        displayFoodDetails(food)
+    })
+}
+
+foods.forEach(addFoodImageToRestaurantMenu)
+
+displayFoodDetails(foods[0])
+
+// Deliverable # 2 solution code
+const newFoodFormElement = document.getElementById('new-food')
+newFoodFormElement.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const newNameInputElement = document.getElementById('new-name')
+    const newImageInputElement = document.getElementById('new-image')
+    const newDescriptionTextareaElement = document.getElementById('new-description')
+
+    const newFood = {
+        name: newNameInputElement.value,
+        image: newImageInputElement.value,
+        description: newDescriptionTextareaElement.value
+    }
+
+    addFoodImageToRestaurantMenu(newFood)
 })
-
-const detailImageElement = document.querySelector('.detail-image')
-detailImageElement.src = foods[0].image
-
-const nameElement = document.querySelector('.name') 
-nameElement.textContent = foods[0].name
-
-const descriptionDisplayElement = document.getElementById('description-display')
-descriptionDisplayElement.textContent = foods[0].description
