@@ -51,19 +51,51 @@ const foods = [
     }
 ]
 
-const restaurantMenuElement = document.getElementById('restaurant-menu')
+function displayFoodDetails(foodObject){
+    const detailImageElement = document.querySelector('.detail-image')
+    const nameElement = document.querySelector('.name')
+    const descriptionDisplayElement = document.getElementById('description-display')
 
-foods.forEach(food => {
+    detailImageElement.src = foodObject.image
+    nameElement.textContent = foodObject.name
+    descriptionDisplayElement.textContent = foodObject.description
+}
+
+function addFoodImageToRestaurantMenu(foodObject){
     const foodImageElement = document.createElement('img')
-    foodImageElement.src = food.image
+    foodImageElement.src = foodObject.image
+
+    foodImageElement.addEventListener('click', () => {
+        displayFoodDetails(foodObject)
+    })
+
+    const restaurantMenuElement = document.getElementById('restaurant-menu')
     restaurantMenuElement.appendChild(foodImageElement)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    foods.forEach(addFoodImageToRestaurantMenu)
+
+    // foods.forEach(food => {
+    //     addFoodImageToRestaurantMenu(food)
+    // })
+
+    displayFoodDetails(foods[0])
+
+    const newFoodFormElement = document.getElementById('new-food')
+    newFoodFormElement.addEventListener('submit', (event) => {
+        event.preventDefault()
+        
+        const newNameInputElement = document.getElementById('new-name')
+        const newImageInputElement = document.getElementById('new-image')
+        const newDescriptionTextareaElement = document.getElementById('new-description')
+
+        const newFood = {
+            name: newNameInputElement.value,
+            image: newImageInputElement.value,
+            description: newDescriptionTextareaElement.value
+        }
+
+        addFoodImageToRestaurantMenu(newFood)
+    })
 })
-
-const detailImageElement = document.querySelector('.detail-image')
-detailImageElement.src = foods[0].image
-
-const nameElement = document.querySelector('.name') 
-nameElement.textContent = foods[0].name
-
-const descriptionDisplayElement = document.getElementById('description-display')
-descriptionDisplayElement.textContent = foods[0].description
