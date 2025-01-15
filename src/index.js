@@ -41,9 +41,27 @@ function handleSubmit(event){
         description: newDescriptionInputElement.value
     }
 
-    addFoodImageToRestaurantMenu(newFood)
+    // Deliverable # 1 solution code
+    // addFoodImageToRestaurantMenu(newFood)
+    // fetch('http://localhost:3000/foods', {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(newFood)
+    // })
 
-    // write your code here
+    // Deliverable # 2 solution code
+    fetch('http://localhost:3000/foods', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(newFood)
+    })
+    .then(response => response.json())
+    .then(newFoodData => addFoodImageToRestaurantMenu(newFoodData))
 
     event.target.reset()
 }
