@@ -62,7 +62,9 @@ function handleSubmit(event){
     })
     .then(response => {
         if(response.ok){
-            response.json().then(newFoodData => addFoodImageToRestaurantMenu(newFoodData))
+            response.json().then(newFoodData => {
+                addFoodImageToRestaurantMenu(newFoodData)
+            })
         }
     })
 
