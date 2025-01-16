@@ -7,6 +7,7 @@ const newImageInputElement = document.getElementById('new-image')
 const newDescriptionInputElement = document.getElementById('new-description')
 
 let currentlyDisplayedFoodId
+let foodsArrayCopy
 
 function addFoodImageToRestaurantMenu(food){
     const imgElement = document.createElement('img')
@@ -29,7 +30,14 @@ function addFoodImageToRestaurantMenu(food){
         })
         .then(response => {
             if(response.ok){
-                imgElement.remove()
+                // Changing the information in the copy of the foods array
+                foodsArrayCopy = foodsArrayCopy.filter(f => {
+                    return f.id !== food.id
+                })
+
+                // Clear out the restaurant-menu element, and iterate over the copy of the food array to re-render the images using the updated data
+                restaurantMenu.innerHTML = ""
+                foodsArrayCopy.forEach(addFoodImageToRestaurantMenu)
             }
             else{
                 alert(`Error: Unable to delete Food # ${food.id}`)
@@ -69,7 +77,12 @@ function addNewFood(event){
     .then(response => {
         if(response.ok){
             response.json().then(newFoodData => {
-                addFoodImageToRestaurantMenu(newFoodData)
+                // Changing the information in the copy of the foods array (adding new food to the array)
+                foodsArrayCopy.push(newFoodData)
+                
+                // Clear out the restaurant-menu element, and iterate over the copy of the food array to re-render the images using the updated data
+                restaurantMenu.innerHTML = ""
+                foodsArrayCopy.forEach(addFoodImageToRestaurantMenu)
             })
         }
         else{
@@ -115,6 +128,20 @@ function addToCart(event){
         if(response.ok){
             response.json().then(updatedFood => {
                 numberInCartCountElement.textContent = updatedFood.number_in_cart
+
+                // Changing the information in the copy of the foods array
+                foodsArrayCopy = foodsArrayCopy.map(food => {
+                    if(food.id === updatedFood.id){
+                        return updatedFood
+                    }
+                    else{
+                        return food
+                    }
+                })
+
+                // Clear out the restaurant-menu element, and iterate over the copy of the food array to re-render the images using the updated data
+                restaurantMenu.innerHTML = ""
+                foodsArrayCopy.forEach(addFoodImageToRestaurantMenu)
             })
         }
         else{
@@ -128,6 +155,8 @@ function addToCart(event){
 fetch('http://localhost:3000/foods')
 .then(response => response.json())
 .then(foods => {
+    foodsArrayCopy = [...foods]
+
     displayFoodDetails(foods[0])
 
     foods.forEach(addFoodImageToRestaurantMenu)
