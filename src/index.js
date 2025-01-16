@@ -17,9 +17,21 @@ function addFoodImageToRestaurantMenu(food){
     restaurantMenu.appendChild(imgElement)
 
     imgElement.addEventListener('click', () => {
-        imgElement.remove()
+        // Deliverable # 3 solution code
+        // imgElement.remove()
+        // fetch(`http://localhost:3000/foods/${food.id}`, {
+        //     method: "DELETE"
+        // })
 
-        // write your code here for Deliverable # 3
+        // Deliverable # 4 solution code
+        fetch(`http://localhost:3000/foods/${food.id}`, {
+            method: "DELETE"
+        })
+        .then(response => {
+            if(response.ok){
+                imgElement.remove()
+            }
+        })
     })
 }
 
@@ -72,9 +84,35 @@ function addToCart(event){
     const numberInCartCountElement = document.getElementById('number-in-cart-count')
 
     const sum = Number(numberInCartCountElement.textContent) + Number(numberToAddInputElement.value)
-    numberInCartCountElement.textContent = sum
 
-    // write your code here for Deliverable # 1
+    // Deliverable # 1 solution code
+    // numberInCartCountElement.textContent = sum
+    // fetch(`http://localhost:3000/foods/${currentlyDisplayedFoodId}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         number_in_cart: sum
+    //     })
+    // })
+
+    // Deliverable # 2 solution code
+    fetch(`http://localhost:3000/foods/${currentlyDisplayedFoodId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            number_in_cart: sum
+        })
+    })
+    .then(response => {
+        if(response.ok){
+            response.json().then(updatedFood => numberInCartCountElement.textContent = updatedFood.number_in_cart)
+        }
+    })
 
     event.target.reset()
 }
