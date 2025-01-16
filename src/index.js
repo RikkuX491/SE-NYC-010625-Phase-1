@@ -60,8 +60,11 @@ function handleSubmit(event){
         },
         body: JSON.stringify(newFood)
     })
-    .then(response => response.json())
-    .then(newFoodData => addFoodImageToRestaurantMenu(newFoodData))
+    .then(response => {
+        if(response.ok){
+            response.json().then(newFoodData => addFoodImageToRestaurantMenu(newFoodData))
+        }
+    })
 
     event.target.reset()
 }
