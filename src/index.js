@@ -110,7 +110,9 @@ function addToCart(event){
     })
     .then(response => {
         if(response.ok){
-            response.json().then(updatedFood => numberInCartCountElement.textContent = updatedFood.number_in_cart)
+            response.json().then(updatedFood => {
+                numberInCartCountElement.textContent = updatedFood.number_in_cart
+            })
         }
     })
 
