@@ -42,4 +42,20 @@ fetch('http://localhost:3000/foods')
     foods.forEach(addFoodImageToRestaurantMenu)
 })
 
-// write your code here
+// Deliverable # 1 solution code
+fetch('https://api.coincap.io/v2/assets')
+.then(response => response.json())
+.then(apiData => {
+    // Deliverable # 2 & 3 solution code
+    const filteredCryptocurrencies = apiData.data.filter(cryptocurrency => {
+        return Number(cryptocurrency.rank) <= 10
+    })
+
+    // Deliverable # 4 solution code
+    filteredCryptocurrencies.forEach(cryptocurrency => {
+        const liElement = document.createElement('li')
+        liElement.textContent = `${cryptocurrency.name} (${cryptocurrency.symbol}): Rank # ${cryptocurrency.rank}`
+        const cryptocurrencyListElement = document.getElementById('cryptocurrency-list')
+        cryptocurrencyListElement.appendChild(liElement)
+    })
+})
