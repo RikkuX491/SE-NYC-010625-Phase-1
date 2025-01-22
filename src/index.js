@@ -42,4 +42,20 @@ fetch('http://localhost:3000/foods')
     foods.forEach(addFoodImageToRestaurantMenu)
 })
 
-// write your code here
+// Deliverable # 1 solution code
+function reverseFoodName(foodName){
+    let reversedString = ""
+
+    for(let index = foodName.length - 1; index >= 0; index--){
+        reversedString += foodName[index]
+    }
+
+    return reversedString
+}
+
+// Deliverable # 2 solution code
+const reverseButtonElement = document.getElementById('reverse-button')
+reverseButtonElement.addEventListener('click', () => {
+    const nameElement = document.querySelector('.name')
+    nameElement.textContent = reverseFoodName(nameElement.textContent)
+})
