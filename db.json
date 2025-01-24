@@ -19,12 +19,6 @@
       "description": "A mushroom burger with our exclusive Flatburger melted cheese!"
     },
     {
-      "id": 4,
-      "name": "Avocado Bun Burger",
-      "image": "./assets/food/avocado-bun-burger.jpeg",
-      "description": "A healthier take on our signature Flatburger but with avocado buns!"
-    },
-    {
       "id": 5,
       "name": "Ramen Burger",
       "image": "./assets/food/ramen-burger.jpeg",
